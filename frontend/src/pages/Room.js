@@ -1,6 +1,6 @@
 function Room() {
     return (
-        <div>Room</div>
+        <div>This is a Room</div>
     );
 }
 

@@ -21,10 +21,10 @@ def generate_room_code():
 class Room(models.Model):
     code = models.CharField(max_length=10, default=generate_room_code, unique=True)
     host = models.CharField(max_length=50, unique=True)
-    host_name = models.CharField(null=False, default=False)
+    host_name = models.CharField(max_length=50, null=False, default=False)
     votes_to_skip = models.IntegerField(null=False, default=1)
     number_of_guests = models.IntegerField(null=False, default=1)
-    created_on = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
 class Guest(models.Model):
     name = models.CharField(max_length=10, default='', unique=True)
