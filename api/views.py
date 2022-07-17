@@ -18,9 +18,6 @@ class GetRoomView(APIView):
         if code!= None:
             room = Room.objects.get(code=code)
             serializer = RoomSerializer(room)
-            #host_name = room.host_name
-            #number_of_guests = room.number_of_guests
-            #votes_to_skip = room.votes_to_skip
         return Response(serializer.data)
 
 

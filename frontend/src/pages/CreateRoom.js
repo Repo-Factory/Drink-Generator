@@ -1,11 +1,12 @@
-import { FormHelperText, Grid, Typography, Button }  from '@mui/material';
+import { FormHelperText, Grid, Typography }  from '@mui/material';
 import { useState } from 'react';
 import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
+import { useNavigate } from "react-router-dom";
 
 
-function CreateRoom() {
-
+function CreateRoom(props) {
+    const navigate = useNavigate();
     const [host_name, setHostName] = useState('');
     const [votes_to_skip, setVotesToSkip] = useState('2');
     const [code, setCode] = useState('')
@@ -21,8 +22,11 @@ function CreateRoom() {
                 body: JSON.stringify(createdRoom),
             })
             const json = await response.json();
+            console.log(json['code'])
             setCode(json['code'])
-            console.log(code)
+            const link = '/room/' + json['code']
+            console.log(link)
+            setTimeout(() => { navigate(link); }, 2000);
         }
         catch(err) {
             throw err;
@@ -51,7 +55,7 @@ function CreateRoom() {
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Create Room'
-                link={'room'} onClick={handleSubmitRoom}/>
+                link='' onClick={handleSubmitRoom}/>
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Back to Lobby' link='/'/>
