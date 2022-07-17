@@ -9,7 +9,7 @@ function CreateRoom() {
 
     const [host_name, setHostName] = useState('');
     const [votes_to_skip, setVotesToSkip] = useState('2');
-
+    const [code, setCode] = useState('')
     //useEffect(() => console.log(votes_to_skip))
 
     function handleSubmitRoom(e) {
@@ -22,9 +22,11 @@ function CreateRoom() {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(createdRoom),
-        }).then(() => {
-            console.log('Room Created')
-        })
+        }).then((response) => response.json())
+            .then((data) => setCode(data.code));
+         
+        setTimeout(() => {console.log({code}); }, 1000);
+        
     }
 
     return (
