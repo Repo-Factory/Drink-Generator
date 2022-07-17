@@ -7,6 +7,7 @@ function InputBox(props) {
             required={true}
             type={props.type}
             defaultValue={props.default}
+            onChange={props.onChange}
             inputProps={{min: 1,
             }}
             />

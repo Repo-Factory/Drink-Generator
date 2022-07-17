@@ -5,9 +5,11 @@ function ButtonCreater(props) {
     return (
     <Button 
     color={props.color} variant='contained' 
-    to={props.link} component={Link}
+    to={props.link} 
+    component={Link} 
+    onClick={props.onClick}
     >
-        {props.text}
+    {props.text}
     </Button>
     );
 }

@@ -1,5 +1,6 @@
-import { FormHelperText, Grid, Typography }  from '@mui/material';
+import { FormHelperText, Grid, Typography, Button }  from '@mui/material';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
 
@@ -9,17 +10,21 @@ function CreateRoom() {
     const [host_name, setHostName] = useState('');
     const [votes_to_skip, setVotesToSkip] = useState('2');
 
+    //useEffect(() => console.log(votes_to_skip))
 
-    function handleSubmitRoom() {
+    function handleSubmitRoom(e) {
+        e.preventDefault();
         const createdRoom = {host_name, votes_to_skip};
+        //console.log(createdRoom)
+        //console.log(JSON.stringify(createdRoom))
     
-    
-    fetch('/api/create', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(createdRoom)
-      }).then((response) => Response.json())
-        .then((data) => console.log(data))
+        fetch('http://localhost:8000/api/create', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(createdRoom),
+        }).then(() => {
+            console.log('Room Created')
+        })
     }
 
     return (
@@ -42,7 +47,13 @@ function CreateRoom() {
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Create Room'
-                link='room' onClick={handleSubmitRoom}/>
+                link='/' onClick={handleSubmitRoom}/>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Button color='secondary' variant='contained'
+                onClick={handleSubmitRoom}>
+                    New Button
+                </Button>
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Back to Lobby' link='/'/>
