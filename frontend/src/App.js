@@ -15,7 +15,7 @@ function App() {
           <Route exact path='/' element={<Lobby />}></Route>
           <Route path='/create' element={<CreateRoom />}></Route>
           <Route path='/join' element={<JoinRoom />}></Route>
-          <Route path='/room' element={<Room />}></Route>
+          <Route path='/room/:roomCode' element={<Room />}></Route>
         </Routes>
       </Router>
     </div>

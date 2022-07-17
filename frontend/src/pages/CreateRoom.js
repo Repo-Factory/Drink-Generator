@@ -47,13 +47,7 @@ function CreateRoom() {
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Create Room'
-                link='/' onClick={handleSubmitRoom}/>
-            </Grid>
-            <Grid item xs={12} align="center">
-                <Button color='secondary' variant='contained'
-                onClick={handleSubmitRoom}>
-                    New Button
-                </Button>
+                link='' onClick={handleSubmitRoom}/>
             </Grid>
             <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='Back to Lobby' link='/'/>

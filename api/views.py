@@ -1,3 +1,4 @@
+from calendar import c
 from rest_framework import generics, status
 from .models import Room
 from .serializers import RoomSerializer, CreateRoomSerializer
@@ -7,6 +8,20 @@ from rest_framework.response import Response
 class RoomView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
+class GetRoomView(APIView):
+    serializer_class = RoomSerializer
+    lookup_url_kwarg = 'code'
+
+    def get(self, request, format=None):
+        code = request.GET.get(self.lookup_url_kwarg)
+        if code!= None:
+            room = Room.objects.get(code=code)
+            serializer = RoomSerializer(room)
+            #host_name = room.host_name
+            #number_of_guests = room.number_of_guests
+            #votes_to_skip = room.votes_to_skip
+        return Response(serializer.data)
 
 
 class CreateRoomView(APIView):
