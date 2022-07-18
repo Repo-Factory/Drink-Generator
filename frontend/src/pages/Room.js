@@ -22,7 +22,7 @@ function Room(props) {
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align="center">
-            {code}
+                {code}
             </Grid>
             <Grid item xs={12} align="center">
                 Your Host: {host_name}

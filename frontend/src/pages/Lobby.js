@@ -1,14 +1,24 @@
 import Banner from '../components/Banner';
-import { Link } from 'react-router-dom';
+import ButtonCreater from '../components/ButtonCreater';
+import { Grid } from '@mui/material'
 
 
 function Lobby() {
+
     return (
-        <div>
-        <Banner text='Welcome to the Drink Generator Lobby'/>
-        <button><Link to="/create">Create Room</Link></button>
-        <button><Link to="/join">Join Room</Link></button>
-        </div>
+        <Grid container spacing={1}>
+            <Grid item xs={12} align="center">
+                <Banner text='Welcome to the Drink Generator Lobby' size='24'/>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <ButtonCreater color='secondary' text='Create Room'
+                link='/create'/>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <ButtonCreater color='secondary' text='Join Room'
+                link='/join' />
+            </Grid>
+        </Grid>
     );
 }
 
