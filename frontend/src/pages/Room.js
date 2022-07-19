@@ -12,9 +12,11 @@ function Room(props) {
     const [votes_to_skip, setVotesToSkip] = useState('');
     const [number_of_guests, setGuestNumber] = useState('');
     const [code, setCode] = useState('')
+    const [details, setDetails] = useState('')
     const [drink, setDrink] = useState('Vodka')
     const [view, setView] = useState('Initialization')
     const [drinkArray, setDrinkArray] = useState([])
+    const [detailsArray, setDetailsArray] = useState([])
 
     fetch('http://localhost:8000/api/room?code=' + roomCode)
         .then(response => response.json())
@@ -25,18 +27,32 @@ function Room(props) {
             setGuestNumber(data.number_of_guests)
         });
     
+
     useEffect(() => {
-        console.log(drink)
-        }, [drink]) 
+        if (details === ''){
+        }
+        else {
+        setView('Details')
+        console.log(details)
+        fetch('http://localhost:8000/cocktails/details?name=' + details)
+        .then(response => response.json())
+        .then(data => setDetailsArray(data))
+        }
+    }, [details]);
     
 
-        //if (this.state.view === "employees") return <div>orange</div>;
-        //if (this.state.view === "department") return <div > apple </div>;
+    useEffect(() => {
+        console.log(detailsArray)
+    }, [detailsArray]);
 
-    function returnToView(){
+    function returnToInitialView(){
         console.log(drinkArray)
         setView('Initialization')
-
+    }
+   
+    function returnToDrinkView(){
+        console.log(drinkArray)
+        setView('Drink')
     }
 
     function cocktailRequest(){
@@ -65,35 +81,50 @@ function Room(props) {
                     <ButtonCreater color='secondary' text='Back to Lobby'
                     link='/' />
                 </Grid>
-                <Grid item xs={12} align="center">
+                <Grid item xs={36} align="center">
                 <FormControl component='fieldset'>
                 <FormHelperText>
                     <div align='center'>Choose Your Drink</div>
                     <RadioGroup row defaultValue='true'>
-                    
                         <FormControlLabel  value='Tequila'
                             control={<Radio color='primary' />}
                             label='tequila'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
-                    
                         <FormControlLabel  value='Gin'
                             control={<Radio color='primary' />}
                             label='gin'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
-
                         <FormControlLabel  value='Vodka'
                             control={<Radio color='primary' />}
                             label='vodka'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
-
                     </RadioGroup>
-                    
+                    <RadioGroup row defaultValue='true'>
+                        <FormControlLabel  value='Rum'
+                            control={<Radio color='primary' />}
+                            label='rum'
+                            labelPlacement='bottom'
+                            onChange={(e) => setDrink(e.target.value)}
+                        />
+                        <FormControlLabel  value='Whiskey'
+                            control={<Radio color='primary' />}
+                            label='whiskey'
+                            labelPlacement='bottom'
+                            onChange={(e) => setDrink(e.target.value)}
+                        />
+                        <FormControlLabel  value='Brandy'
+                            control={<Radio color='primary' />}
+                            label='brandy'
+                            labelPlacement='bottom'
+                            onChange={(e) => setDrink(e.target.value)}
+                        />
+                    </RadioGroup>
                 </FormHelperText>
             </FormControl>
         
@@ -113,13 +144,9 @@ function Room(props) {
     if (view === 'Drink') {
         let drinkCardItems = [];
         for(let i = 0; i < drinkArray.length; i++){
-            console.log(drinkArray[i]['strDrink'])
-            console.log(drinkArray[i]['strDrinkThumb'])
-        }
-
-
-        for(let i = 0; i < drinkArray.length; i++){
-            drinkCardItems.push(<DrinkCard name={drinkArray[i]['strDrink']} />)
+            drinkCardItems.push(<DrinkCard name={drinkArray[i]['strDrink']} 
+            image={drinkArray[i]['strDrinkThumb']} onClick={(e) => setDetails(drinkArray[i]['strDrink'].toLowerCase())}
+            />)
         }
 
         return (
@@ -129,9 +156,27 @@ function Room(props) {
                 </span>
                 <Grid item xs={12} align="center">
                 <ButtonCreater color='secondary' text='New Drinks'
-                    link='' onClick={returnToView}/>
+                    link='' onClick={returnToInitialView}/>
                 </Grid>
             </span>
+        )
+    }
+    if (view === 'Details') {
+        return (
+            <div>
+                <DrinkCard name={details} />
+                <Grid item xs={12} align="center">
+                <div>{detailsArray[0]}</div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                <div>{detailsArray[1]}</div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                <div>{detailsArray[2]}</div>
+                </Grid>
+                <ButtonCreater color='secondary' text='Go Back'
+                    link='' onClick={returnToDrinkView}/>
+            </div>
         )
     }
 }

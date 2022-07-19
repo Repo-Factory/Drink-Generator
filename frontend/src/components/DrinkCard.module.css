@@ -19,6 +19,12 @@
   }
 }
 
+.inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .previewcard {
   align-items: flex-start;
   background-color: #fff;
@@ -44,14 +50,6 @@
   font-weight: 700;
 }
 
-.previewcardimage {
-  background-image: url('https://www.thecocktaildb.com/images/media/drink/xxyywq1454511117.jpg');
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 200px;
-  width: 240px;
-}
 
 @media (min-width: 768px) {
   .cutting-line1 {
