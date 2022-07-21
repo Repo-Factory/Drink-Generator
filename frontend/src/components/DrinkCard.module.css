@@ -6,18 +6,7 @@
   padding: 0;
 }
 
-@media (min-width: 768px) {
-  .preview-section {
-    border-radius: 6px;
-    width: 50%;
-  }
-}
-@media (min-width: 1200px) {
-  .preview-section {
-    width: 100%;
-    height: 100vh;
-  }
-}
+
 
 .inline {
     display: flex;
@@ -48,17 +37,5 @@
   font-family: Montserrat, sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
-}
-
-
-@media (min-width: 768px) {
-  .cutting-line1 {
-    width: 90%;
-  }
-}
-@media (min-width: 1200px) {
-  .cutting-line1 {
-    width: 90%;
-  }
 }
 

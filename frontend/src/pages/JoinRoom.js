@@ -17,6 +17,7 @@ function JoinRoom() {
     }
 
     return (
+        <div className='center'>
         <Grid container spacing={1}>
             <Grid item xs={12} align="center">
                 <Typography>Join A Room</Typography>
@@ -43,6 +44,7 @@ function JoinRoom() {
                 link='/' />
             </Grid>
         </Grid>
+        </div>
     );
 }
 

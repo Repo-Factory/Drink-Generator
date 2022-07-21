@@ -21,7 +21,7 @@ function DrinkCard(props) {
     return (
     <div>
         <article className ={classes.previewcard}>
-          <div clasName={classes.previewcarddiv}>
+          <div className={classes.previewcarddiv}>
             <h3 className={classes.previewcarddivname}>
                 <Link onClick={props.onClick} underline="hover" color='inherit'>
                 {props.name}
