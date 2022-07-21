@@ -76,11 +76,11 @@ function Room(props) {
                 <Grid item xs={12} align="center">
                 
                 </Grid>
-                <Grid item xs={12} align="center">
-                <FormControl component='fieldset'>
-                <FormHelperText>
+                <Grid item xs={24} align="center">
+                <FormControl component='fieldset' align='center'>
+                <FormHelperText align='center'>
                     <h3 align='center'>Choose Your Drink</h3>
-                    <RadioGroup row defaultValue='true'>
+                    <RadioGroup row defaultValue='true' align='center'>
                         <FormControlLabel  value='Tequila'
                             control={<Radio color='primary' />}
                             label='tequila'
@@ -105,9 +105,9 @@ function Room(props) {
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
-                        <FormControlLabel  value='Whiskey'
+                        <FormControlLabel  value='Champagne'
                             control={<Radio color='primary' />}
-                            label='whiskey'
+                            label='wine'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
@@ -117,7 +117,7 @@ function Room(props) {
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
-                    
+
                     </RadioGroup>
                     
                        
