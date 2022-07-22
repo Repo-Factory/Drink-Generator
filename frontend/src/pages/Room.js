@@ -6,7 +6,7 @@ import { useEffect} from 'react';
 import DrinkCard from '../components/DrinkCard';
 
 
-function Room(props) {
+function Room() {
     const { roomCode } = useParams();
     const [host_name, setHostName] = useState('');
     const [votes_to_skip, setVotesToSkip] = useState('');
@@ -30,6 +30,14 @@ function Room(props) {
         });
     
 
+    function cocktailRequest() {
+        setView('Drink')
+        fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase())
+        .then(response => response.json())
+        .then(data => setDrinkArray(data))
+    }   
+
+
     useEffect(() => {
         if (details === ''){
         }
@@ -43,20 +51,15 @@ function Room(props) {
     }, [details]);
     
 
-    function returnToInitialView(){
+    function returnToInitialView() {
         setView('Initialization')
     }
    
-    function returnToDrinkView(){
+
+    function returnToDrinkView() {
         setView('Drink')
     }
 
-    function cocktailRequest(){
-        setView('Drink')
-        fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase())
-        .then(response => response.json())
-        .then(data => setDrinkArray(data))
-    }   
 
     if (view === "Initialization") {
         return (
@@ -194,21 +197,21 @@ function Room(props) {
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h2 style={{color: 'white'}}> Ingredients List: </h2>
+                            <h2 style={{color: 'white'}}> Ingredients List:</h2>
                             <h4 style={{color: 'white'}}>{detailsArray[3]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h3 style={{color: 'white'}}>Appropriate Glass: </h3>
+                            <h3 style={{color: 'white'}}>Appropriate Glass:</h3>
                             <h4 style={{color: 'white'}}>{detailsArray[1]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h1 style={{color: 'white'}}> Instructions: </h1>
+                            <h1 style={{color: 'white'}}> Instructions:</h1>
                             <h4 style={{color: 'white'}}>{detailsArray[2]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
