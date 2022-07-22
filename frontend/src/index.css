@@ -1,9 +1,7 @@
 
 body {
-	background: url('/home/conner/projects/drink-generator/frontend/src/images/background1.jpg') no-repeat center center fixed;
-	opacity: 1;
+	background: url('/home/conner/projects/drink-generator/frontend/src/images/background.jpg') no-repeat center center fixed;
 	background-size: cover;
 	background-position: calc(70%) 50%;
-
 };
 

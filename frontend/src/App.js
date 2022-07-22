@@ -3,22 +3,13 @@ import Lobby from './pages/Lobby';
 import JoinRoom from './pages/JoinRoom';
 import CreateRoom from './pages/CreateRoom';
 import Room from './pages/Room';
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
-function App(props) {
-
-  const background = {
-        
-    backgroundImage: `url(${props.image})`,
-  
-  }
-  
-
+function App() {
 
   return (
-    <div style={background}>
+    <div>
       <Router> 
         <Routes>
           <Route exact path='/' element={<Lobby />}></Route>

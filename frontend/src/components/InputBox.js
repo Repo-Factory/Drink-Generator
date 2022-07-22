@@ -1,14 +1,5 @@
 import { FormControl, FormHelperText, TextField }  from '@mui/material';
 
-const boxStyle = {
-    root: {
-        '&$disabled $notchedOutline': {
-        borderColor: 'orange'
-        }
-    },
-    disabled: {},
-    notchedOutline: {}
-}
 
 function InputBox(props) {
     return (
@@ -17,17 +8,17 @@ function InputBox(props) {
             sx={{
                 "& .MuiOutlinedInput-root:hover": {
                     "& > fieldset": {
-                      borderColor: "white"
+                    borderColor: "white"
                     }
                   },
                 "& .MuiOutlinedInput-root.Mui-focused": {
                     "& > fieldset": {
-              borderColor: "white"
+                borderColor: "white"
                     }
                   },
                 "& .MuiInputLabel-root": {color: 'white'},//styles the label
                 "& .MuiOutlinedInput-root": {
-                  "& > fieldset": { borderColor: "white" },
+                "& > fieldset": { borderColor: "white" },
                 },
               }}
             

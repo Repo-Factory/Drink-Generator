@@ -1,4 +1,3 @@
-import Banner from '../components/Banner';
 import ButtonCreater from '../components/ButtonCreater';
 import { Grid } from '@mui/material'
 

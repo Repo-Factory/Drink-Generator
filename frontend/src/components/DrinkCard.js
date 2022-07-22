@@ -16,8 +16,6 @@ function DrinkCard(props) {
     
     }
 
-    
-
     return (
     <div>
         <article className={classes.previewcard}>
@@ -30,7 +28,7 @@ function DrinkCard(props) {
             </h3>
           </div>
           <div style={imageStyle}>
-            <div class="false-stuffed">
+            <div>
               <div
                 style={imageStyle}
               ></div>

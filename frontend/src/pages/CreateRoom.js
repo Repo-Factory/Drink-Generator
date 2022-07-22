@@ -1,4 +1,4 @@
-import { FormHelperText, Grid, ButtonGroup }  from '@mui/material';
+import { FormHelperText, Grid }  from '@mui/material';
 import { useState } from 'react';
 import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
@@ -19,16 +19,12 @@ function CreateRoom(props) {
                 body: JSON.stringify(createdRoom),
             })
             const json = await response.json();
-            console.log(json['code'])
             const link = '/room/' + json['code']
-            console.log(link)
             setTimeout(() => { navigate(link); }, 2000);
         }
         catch(err) {
             throw err;
         }
-        
-        
     }
 
     return (
