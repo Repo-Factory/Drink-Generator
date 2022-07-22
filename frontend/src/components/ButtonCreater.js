@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 function ButtonCreater(props) {
     return (
     <Button 
+    style={props.style}
     color={props.color} variant='contained' 
     to={props.link} 
     component={Link} 

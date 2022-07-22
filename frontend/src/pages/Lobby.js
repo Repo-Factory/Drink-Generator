@@ -9,17 +9,17 @@ function Lobby() {
         <div className='center'>
             <Grid container spacing={8}>
                 <Grid item xs={12} align="center">
-                    <h2>Welcome to the Drink Generator Lobby</h2>
+                    <div style={{color: 'white', fontSize:'7vmin'}}>Welcome to the Drink Generator Lobby</div>
                 </Grid>
                 <Grid item xs={12} align="center">
 
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <ButtonCreater color='secondary' text='Create Room'
+                    <ButtonCreater style={{backgroundColor: '#383838'}} text='Create Room'
                     link='/create'/>
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <ButtonCreater color='secondary' text='Join Room'
+                    <ButtonCreater style={{backgroundColor: '#383838'}} text='Join Room'
                     link='/join' />
                 </Grid>
             </Grid>

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState} from 'react';
-import { Grid, RadioGroup, Radio, FormControlLabel, FormControl, FormHelperText} from '@mui/material'
+import { Box, Grid, RadioGroup, Radio, FormControlLabel, FormControl, FormHelperText} from '@mui/material'
 import ButtonCreater from '../components/ButtonCreater';
 import { useEffect} from 'react';
 import DrinkCard from '../components/DrinkCard';
@@ -53,7 +53,7 @@ function Room(props) {
 
     function cocktailRequest(){
         setView('Drink')
-        fetch('http://localhost:8000/cocktails/generate?drink=' + drink)
+        fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase())
         .then(response => response.json())
         .then(data => setDrinkArray(data))
     }   
@@ -65,70 +65,70 @@ function Room(props) {
                 
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <h1>{code}</h1>
+                    <div style={{color: 'white', fontSize: '36px'}}> Room {code}</div>
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <h1>Your Host: {host_name}</h1>
-                </Grid>
-                <Grid item xs={12} align="center">
-                
+                    <div style={{color: 'white', fontSize: '36px'}}>Your Host: {host_name}</div>
                 </Grid>
                 <Grid item xs={12} align="center">
                 
                 </Grid>
+              
                 <Grid item xs={24} align="center">
+                <Box textAlign='center'>
                 <FormControl component='fieldset' align='center'>
                 <FormHelperText align='center'>
-                    <h3 align='center'>Choose Your Drink</h3>
-                    <RadioGroup row defaultValue='true' align='center'>
+                    <div style={{color: 'white', fontSize: '16px', marginBottom:20}} align='center'>Choose Your Drink</div>
+
+                    <RadioGroup row defaultValue='true' align='center' style={{color: 'white', width:'auto', height:'auto', flexWrap: 'wrap', justifyContent: 'center', display: 'flex', fontSize: '16px'}}>
+                        
                         <FormControlLabel  value='Tequila'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white', width:'auto'}} />}
                             label='tequila'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
                         <FormControlLabel  value='Gin'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white', width:'auto'}} />}
                             label='gin'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
                         <FormControlLabel  value='Vodka'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white', width:'auto'}} />}
                             label='vodka'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
                          <FormControlLabel  value='Rum'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white'}} />}
                             label='rum'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
                         <FormControlLabel  value='Champagne'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white'}} />}
                             label='wine'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
                         <FormControlLabel  value='Brandy'
-                            control={<Radio color='primary' />}
+                            control={<Radio style={{color: 'white'}} />}
                             label='brandy'
                             labelPlacement='bottom'
                             onChange={(e) => setDrink(e.target.value)}
                         />
 
                     </RadioGroup>
-                    
-                       
                 </FormHelperText>
             </FormControl>
+            </Box>
                 </Grid>
                 <Grid item xs={6} align="center">
                 
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <ButtonCreater color='secondary' text='Generate Drinks'
+                    <ButtonCreater style={{backgroundColor: '#383838'}} text='Generate Drinks'
                     link='' onClick={cocktailRequest}/>
                 </Grid>
                 <Grid item xs={12} align="center">
@@ -138,18 +138,16 @@ function Room(props) {
                 
                 </Grid>
                 
-               
-                
                 <Grid container item xs={12}>
-                    <Grid item xs={4} align="center">
-                        <h3>Votes to skip: {votes_to_skip}</h3>
+                    <Grid item xs={3} align="center">
+                        <div style={{color: 'white', fontSize: '18px'}}>Votes to skip: {votes_to_skip}</div>
                     </Grid>
-                    <Grid item xs={4} align="center">
-                    <ButtonCreater color='secondary' text='Back to Lobby'
+                    <Grid item xs={6} align="center">
+                    <ButtonCreater style={{backgroundColor: '#383838'}} text='Back to Lobby'
                     link='/'/>
                     </Grid>
-                    <Grid item xs={4} align="center">
-                        <h3>Number of Guests: {number_of_guests}</h3>
+                    <Grid item xs={3} align="center">
+                        <div style={{color: 'white', fontSize: '18px'}}>Number of Guests: {number_of_guests}</div>
                     </Grid>
                 </Grid>
                 
@@ -161,7 +159,7 @@ function Room(props) {
         let drinkCardItems = [];
         for(let i = 0; i < drinkArray.length; i++){
             drinkCardItems.push(<Grid item xs={12} sm={6} align='center'><DrinkCard name={drinkArray[i]['strDrink']} 
-            image={drinkArray[i]['strDrinkThumb']} onClick={(e) => setDetails(drinkArray[i]['strDrink'].toLowerCase())}
+            image={drinkArray[i]['strDrinkThumb']} onClick={(e) => setDetails(drinkArray[i]['strDrink'])}
             /></Grid>)
         }
 
@@ -172,7 +170,7 @@ function Room(props) {
                 </Grid>
                 <div className='button'>
                         <Grid item xs={12} align="center">
-                            <ButtonCreater color='secondary' text='New Drinks'
+                            <ButtonCreater style={{backgroundColor: '#383838'}} text='New Drinks'
                                 link='' onClick={returnToInitialView}/>
                         </Grid>
                 </div>
@@ -196,31 +194,33 @@ function Room(props) {
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h2> Ingredients List: </h2>
-                            <h4>{detailsArray[3]}</h4>
+                            <h2 style={{color: 'white'}}> Ingredients List: </h2>
+                            <h4 style={{color: 'white'}}>{detailsArray[3]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h3>Appropriate Glass: </h3>
-                            <h4>{detailsArray[1]}</h4>
+                            <h3 style={{color: 'white'}}>Appropriate Glass: </h3>
+                            <h4 style={{color: 'white'}}>{detailsArray[1]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
                             
                         </Grid>
                         <Grid item xs={12} align="center">
-                            <h1> Instructions: </h1>
-                            <h4>{detailsArray[2]}</h4>
+                            <h1 style={{color: 'white'}}> Instructions: </h1>
+                            <h4 style={{color: 'white'}}>{detailsArray[2]}</h4>
                         </Grid>
                         <Grid item xs={12} align="center">
                             
-                        </Grid>
-                        <Grid item xs={12} align="center">
-                        <ButtonCreater color='secondary' text='Go Back'
-                            link='' onClick={returnToDrinkView}/>
                         </Grid>
                     </Grid>
+                    <div className='button'>
+                        <Grid item xs={12} align="center">
+                            <ButtonCreater style={{backgroundColor: '#383838'}} text='Go Back'
+                                link='' onClick={returnToDrinkView}/>
+                        </Grid>
+                    </div>
                 </div>
             
         )

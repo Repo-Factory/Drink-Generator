@@ -1,4 +1,4 @@
-import { FormHelperText, Grid, Typography }  from '@mui/material';
+import { FormHelperText, Grid, ButtonGroup }  from '@mui/material';
 import { useState } from 'react';
 import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
@@ -33,13 +33,13 @@ function CreateRoom(props) {
 
     return (
         <div className='center'>
-            <Grid container spacing={1}>
+            <Grid container spacing={4}>
                 <Grid item xs={12} align="center">
-                    <Typography>Create A Room</Typography>
+                    <div style={{color: 'white', fontSize: '48px'}}>Create A Room</div>
                 </Grid>
                 <Grid item xs={12} align="center">
                     <FormHelperText>
-                        <div align='center'>Enter Room Details</div>
+                        <div align='center' style={{color:'white', fontSize:'16px'}} >Enter Room Details</div>
                     </FormHelperText>
                 </Grid>
                 <Grid item xs={12} align="center">
@@ -51,11 +51,12 @@ function CreateRoom(props) {
                     default={votes_to_skip} onChange={(e) => setVotesToSkip(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <ButtonCreater color='secondary' text='Create Room'
-                    link='' onClick={handleSubmitRoom}/>
+
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <ButtonCreater color='secondary' text='Back to Lobby' link='/'/>
+                        <ButtonCreater style={{backgroundColor: '#383838'}} text='Create Room'
+                        link='' onClick={handleSubmitRoom}/>
+                        <ButtonCreater style={{backgroundColor: '#383838'}} text='Back to Lobby' link='/'/>
                 </Grid>
             </Grid>
         </div>

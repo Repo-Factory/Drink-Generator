@@ -18,13 +18,13 @@ function JoinRoom() {
 
     return (
         <div className='center'>
-        <Grid container spacing={1}>
-            <Grid item xs={12} align="center">
-                <Typography>Join A Room</Typography>
+        <Grid container spacing={4}>
+            <Grid item xs={12} align="center" >
+                <div style={{color: 'white', fontSize:'48px'}}>Join A Room</div>
             </Grid>
             <Grid item xs={12} align="center">
                 <FormHelperText>
-                    <div align='center'>Enter Guest Details</div>
+                    <div align='center' style={{color: 'white', fontSize:'16px'}}>Enter Guest Details</div>
                 </FormHelperText>
             </Grid>
             <Grid item xs={12} align="center">
@@ -36,11 +36,12 @@ function JoinRoom() {
                  default='AAAAAA' onChange={(e) => setCode(e.target.value)}/>
             </Grid>
             <Grid item xs={12} align="center">
-                <ButtonCreater color='secondary' text='Join Room'
-                link='' onClick={HandleJoinRoom}/>
+           
             </Grid>
             <Grid item xs={12} align="center">
-                <ButtonCreater color='secondary' text='Back to Lobby'
+                <ButtonCreater style={{backgroundColor: '#383838'}} text='Join Room'
+                link='' onClick={HandleJoinRoom}/>
+                <ButtonCreater style={{backgroundColor: '#383838'}} text='Back to Lobby'
                 link='/' />
             </Grid>
         </Grid>

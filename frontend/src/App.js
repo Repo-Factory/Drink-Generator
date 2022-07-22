@@ -7,10 +7,18 @@ import Room from './pages/Room';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
-function App() {
+function App(props) {
+
+  const background = {
+        
+    backgroundImage: `url(${props.image})`,
+  
+  }
+  
+
 
   return (
-    <div>
+    <div style={background}>
       <Router> 
         <Routes>
           <Route exact path='/' element={<Lobby />}></Route>
