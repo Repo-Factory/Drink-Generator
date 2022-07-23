@@ -5,7 +5,7 @@ function InputBox(props) {
     return (
     <FormControl >
         <TextField
-            sx={{
+            sx={{ //makes the label white
                 "& .MuiOutlinedInput-root:hover": {
                     "& > fieldset": {
                     borderColor: "white"
@@ -16,7 +16,7 @@ function InputBox(props) {
                 borderColor: "white"
                     }
                   },
-                "& .MuiInputLabel-root": {color: 'white'},//styles the label
+                "& .MuiInputLabel-root": {color: 'white'}, 
                 "& .MuiOutlinedInput-root": {
                 "& > fieldset": { borderColor: "white" },
                 },

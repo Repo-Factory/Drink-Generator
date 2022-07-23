@@ -1,26 +1,36 @@
-import { useParams } from 'react-router-dom';
 import { useState} from 'react';
+import { useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, Grid, RadioGroup, Radio, FormControlLabel, FormControl, FormHelperText} from '@mui/material'
 import ButtonCreater from '../components/ButtonCreater';
-import { useEffect} from 'react';
 import DrinkCard from '../components/DrinkCard';
 
 
+// Heaviest page of the website, fields store info on the room plus details of the drinks, has three views - Initial, drink, and details
+// 1. first page has a list of alcohols to choose from 
+// 2. generate drink buttons displays drinks to the user on new view,
+// 3. names can be clicked on to be directed to a new view with more details
+
+
 function Room() {
-    const { roomCode } = useParams();
+    const [view, setView] = useState('Initial');
+    const { roomCode } = useParams(); // roomCode passed in by URL through react route when directed to room page : see App.js
+    const [code, setCode] = useState('');
     const [host_name, setHostName] = useState('');
     const [votes_to_skip, setVotesToSkip] = useState('');
     const [number_of_guests, setGuestNumber] = useState('');
-    const [code, setCode] = useState('');
-    const [image, setImage] = useState('');
-    const [details, setDetails] = useState('');
     const [drink, setDrink] = useState('Vodka');
-    const [view, setView] = useState('Initialization');
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
     const [drinkArray, setDrinkArray] = useState([]);
     const [detailsArray, setDetailsArray] = useState([]);
+    const [roomCodeCalled, setRoomCodeCalled] = useState('False');
+    const [idCalled, setIdCalled] = useState('False');
+    
 
-
-    fetch('http://localhost:8000/api/room?code=' + roomCode)
+    // uses roomcode from URL to display details about that room
+    if (roomCodeCalled === 'False') {
+        fetch('http://localhost:8000/api/room?code=' + roomCode)
         .then(response => response.json())
         .then(data => {
             setHostName(data.host_name)
@@ -28,8 +38,11 @@ function Room() {
             setCode(data.code)
             setGuestNumber(data.number_of_guests)
         });
+        setRoomCodeCalled('True') // prevents this from getting called infinitely
+    }
     
-
+    // When 'Generate Drinks' button is clicked, an array of drink names and images is requested from the backend
+    // and displayed to the user through the drinkCard component
     function cocktailRequest() {
         setView('Drink')
         fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase())
@@ -37,22 +50,24 @@ function Room() {
         .then(data => setDrinkArray(data))
     }   
 
-
+    // When drinkCard name is clicked, that name is saved to 'name' which triggers useEffect to change to details page
+    // and request details from the API by name, this doesn't retrieve image, but does retrieve an id used in details view
+    // to  make another request and get the image
     useEffect(() => {
-        if (details === ''){
+        if (name === ''){
         }
         else {
+        setIdCalled('False') // so user can click on multiple drinks
         setTimeout(() => { setView('Details') }, 1000);
-        console.log(details)
-        fetch('http://localhost:8000/cocktails/details?name=' + details)
+        fetch('http://localhost:8000/cocktails/name?name=' + name.toLowerCase())
         .then(response => response.json())
         .then(data => setDetailsArray(data))
         }
-    }, [details]);
+    }, [name]);
     
 
     function returnToInitialView() {
-        setView('Initialization')
+        setView('Initial')
     }
    
 
@@ -61,14 +76,15 @@ function Room() {
     }
 
 
-    if (view === "Initialization") {
+//1st view/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    if (view === "Initial") {
         return (
             <Grid container spacing={6}>
                 <Grid item xs={12} align="center">
-                
+                                                                                            
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <div style={{color: 'white', fontSize: '36px'}}> Room {code}</div>
+                    <div style={{color: 'white', fontSize: '36px'}}>Room {code}</div>
                 </Grid>
                 <Grid item xs={12} align="center">
                     <div style={{color: 'white', fontSize: '36px'}}>Your Host: {host_name}</div>
@@ -158,11 +174,13 @@ function Room() {
             </Grid>
         ); 
     }
+
+//2nd view////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (view === 'Drink') {
         let drinkCardItems = [];
         for(let i = 0; i < drinkArray.length; i++){
             drinkCardItems.push(<Grid item xs={12} sm={6} align='center'><DrinkCard name={drinkArray[i]['strDrink']} 
-            image={drinkArray[i]['strDrinkThumb']} onClick={(e) => setDetails(drinkArray[i]['strDrink'])}
+            image={drinkArray[i]['strDrinkThumb']} onClick={() => setName(drinkArray[i]['strDrink'])}
             /></Grid>)
         }
 
@@ -180,18 +198,24 @@ function Room() {
             </div>
         )
     }
+
+//3rd view////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (view === 'Details') {
         
-        const id = detailsArray[0]
-        fetch('http://localhost:8000/cocktails/id?id=' + id)
-        .then(response => response.json())
-        .then(data => {setImage(data)});
+        //gets image from the API using the id attribute retrieved in the name API call
+        if (idCalled === 'False'){
+            const id = detailsArray[0]
+            fetch('http://localhost:8000/cocktails/id?id=' + id)
+            .then(response => response.json())
+            .then(data => {setImage(data)});
+            setIdCalled('True');
+        }
 
         return (
                 <div className = 'detailsCenter'>
                     <Grid container spacing={2}>
                         <Grid item xs={12} align="center">
-                        <DrinkCard name={details} image={image}/>
+                        <DrinkCard name={name} image={image}/>
                         </Grid>
                         <Grid item xs={12} align="center">
                             

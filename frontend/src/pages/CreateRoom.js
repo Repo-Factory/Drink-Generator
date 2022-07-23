@@ -1,16 +1,23 @@
-import { FormHelperText, Grid }  from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { FormHelperText, Grid }  from '@mui/material';
 import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
-import { useNavigate } from "react-router-dom";
 
 
-function CreateRoom(props) {
-    const navigate = useNavigate();
-    const [host_name, setHostName] = useState('');
+
+function CreateRoom() {
+    const navigate = useNavigate(); //used to navigate to room link in App.js Room route
+    
+    const [host_name, setHostName] = useState(''); // values inputed in form, state is changed onChange of form
     const [votes_to_skip, setVotesToSkip] = useState('2');
 
-    async function handleSubmitRoom(e) {
+    // when create room clicked, post request made to django to make new room with info from form
+    // this spits out a response afterwards with info on the room that the user doesn't change
+    // for example, the room code, and host session, the roomcode of the created room is given back
+    // so that react can navigate to the new room page; the URL code serves as a parameter
+    // to be used by the room page to get details on that room from django
+    async function handleSubmitRoom() {
         const createdRoom = {host_name, votes_to_skip};
         try{
             const response = await fetch('http://localhost:8000/api/create', {
@@ -20,7 +27,7 @@ function CreateRoom(props) {
             })
             const json = await response.json();
             const link = '/room/' + json['code']
-            setTimeout(() => { navigate(link); }, 2000);
+            setTimeout(() => { navigate(link); }, 1000);
         }
         catch(err) {
             throw err;
@@ -40,7 +47,7 @@ function CreateRoom(props) {
                 </Grid>
                 <Grid item xs={12} align="center">
                     <InputBox type='text' message='Host Name'
-                    default='Name' onChange={(e) => setHostName(e.target.value)}/>
+                    default='Name' onChange={(e) => setHostName(e.target.value)}/> 
                 </Grid>
                 <Grid item xs={12} align="center">
                     <InputBox type='number' message='Votes Required to Skip Drink'

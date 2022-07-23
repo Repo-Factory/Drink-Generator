@@ -5,6 +5,7 @@ import { Link } from '@mui/material'
 
 function DrinkCard(props) {
 
+    // dynamically passes in URL of the image to drinkCard, passed in rooms page drinks view with drinksArray info 
     const imageStyle = {
         
         backgroundImage: `url(${props.image})`,

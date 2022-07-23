@@ -1,5 +1,6 @@
-import ButtonCreater from '../components/ButtonCreater';
 import { Grid } from '@mui/material'
+import ButtonCreater from '../components/ButtonCreater';
+
 
 
 function Lobby() {

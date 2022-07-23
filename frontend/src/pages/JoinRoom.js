@@ -1,17 +1,18 @@
-import { Grid, Typography, FormHelperText } from '@mui/material';
-import InputBox from '../components/InputBox';
-import ButtonCreater from '../components/ButtonCreater';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import { Grid, FormHelperText } from '@mui/material';
+import InputBox from '../components/InputBox';
+import ButtonCreater from '../components/ButtonCreater';
+
 
 
 function JoinRoom() {
-    const [code, setCode] = useState('');
     const navigate = useNavigate()
+    const [code, setCode] = useState('');
+    
+    //redirects user to the URL of the desired room, they must input valid code to be taken to valid room 
     function HandleJoinRoom() {
-        setTimeout(() => { console.log(code); }, 1000);
         const link = '/room/' + code
-        setTimeout(() => { console.log(link); }, 1000);
         setTimeout(() => { navigate(link); }, 1000);
 
     }
