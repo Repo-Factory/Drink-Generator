@@ -20,7 +20,7 @@ function CreateRoom() {
     async function handleSubmitRoom() {
         const createdRoom = {host_name, votes_to_skip};
         try{
-            const response = await fetch('http://localhost:8000/api/create', {
+            const response = await fetch('http://localhost:8000/rooms/create', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(createdRoom),

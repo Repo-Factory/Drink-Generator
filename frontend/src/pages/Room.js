@@ -30,7 +30,7 @@ function Room() {
 
     // uses roomcode from URL to display details about that room
     if (roomCodeCalled === 'False') {
-        fetch('http://localhost:8000/api/room?code=' + roomCode)
+        fetch('http://localhost:8000/rooms/room?code=' + roomCode)
         .then(response => response.json())
         .then(data => {
             setHostName(data.host_name)
