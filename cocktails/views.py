@@ -5,8 +5,8 @@ from cocktails.helper import Helper
 
 # from TheCocktailDB website, different endpoints for searching drinks based on alcohol type, name, or id number
 class API_URLs():
-    byAlochol = f"http://www.thecocktaildb.com/api/json/v1/1/filter.php?i="
-    byName = f"http://www.thecocktaildb.com/api/json/v1/1/search.php?api_key=1&s="
+    byAlochol = "http://www.thecocktaildb.com/api/json/v1/1/filter.php?i="
+    byName = "http://www.thecocktaildb.com/api/json/v1/1/search.php?api_key=1&s="
     byId = "http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="
 
 

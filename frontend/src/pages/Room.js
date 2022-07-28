@@ -5,12 +5,12 @@ import { Box, Grid, RadioGroup, Radio, FormControlLabel, FormControl, FormHelper
 import ButtonCreater from '../components/ButtonCreater';
 import DrinkCard from '../components/DrinkCard';
 
-
-// Heaviest page of the website, fields store info on the room plus details of the drinks, has three views - Initial, drink, and details
-// 1. first page has a list of alcohols to choose from 
-// 2. generate drink buttons displays drinks to the user on new view,
-// 3. names can be clicked on to be directed to a new view with more details
-
+    /** 
+     *  Heaviest page of the website, fields store info on the room plus details of the drinks, has three views - Initial, drink, and details
+     * 1. first page has a list of alcohols to choose from 
+     * 2. generate drink buttons displays drinks to the user on new view,
+     * 3. names can be clicked on to be directed to a new view with more details
+     */
 
 function Room() {
     const [view, setView] = useState('Initial');
