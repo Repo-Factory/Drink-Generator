@@ -38,8 +38,6 @@ function CreateRoom() {
     // to be used by the room page to get details on that room from django
     async function handleSubmitRoom() {
         const createdRoom = {host_name, votes_to_skip};
-        console.log(createdRoom)
-        console.log(JSON.stringify(createdRoom))
         try{
             const response = await fetch('http://localhost:8000/rooms/create', {
                 method: 'POST',
@@ -50,10 +48,8 @@ function CreateRoom() {
                 body: JSON.stringify(createdRoom),
             })
             const json = await response.json();
-            console.log(json)
-            console.log(json['code'])
             const link = '/room/' + json['code']
-            setTimeout(() => { navigate(link); }, 2000);
+            setTimeout(() => { navigate(link); }, 1000);
         }
         catch(err) {
             throw err;
