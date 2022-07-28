@@ -1,9 +1,6 @@
-
-![Drink Generator Full Thumb](https://user-images.githubusercontent.com/108435248/181649641-daf7b972-9a15-4fa2-90bc-ddf006ffaa0b.png "Drink Array")
-
-
 # Drink-Generator Web App #
 
+![Drink Generator Full Thumb](https://user-images.githubusercontent.com/108435248/181649641-daf7b972-9a15-4fa2-90bc-ddf006ffaa0b.png "Drink Array")
 
 ## Introduction ##
 This is a dynamic SPA built with react hooks that makes API requests (using a django backend) to a cocktail database to display random cocktail ideas of a preferred liquer/alcohol.
