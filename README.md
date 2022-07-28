@@ -16,6 +16,10 @@ Set up is very easy because the build is included in the source code. To install
 
 ```git clone https://github.com/Repo-Factory/Drink-Generator.git .```
 
+activate the virtual environment
+
+```source env/bin/activate```
+
 and run the server with:
 
 ```python manage.py runserver```
