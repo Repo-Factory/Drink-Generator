@@ -24,7 +24,7 @@ and run the server with:
 
 ```python manage.py runserver```
 
-You'll find the app running at [localhost:8000]('http://localhost:8000').
+You'll find the app running at [localhost:8000](http://localhost:8000)
 
 
 

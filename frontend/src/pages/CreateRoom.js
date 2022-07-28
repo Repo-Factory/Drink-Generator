@@ -11,6 +11,25 @@ function CreateRoom() {
     
     const [host_name, setHostName] = useState(''); // values inputed in form, state is changed onChange of form
     const [votes_to_skip, setVotesToSkip] = useState('2');
+    var csrftoken = makeCookie('csrftoken');
+
+   
+    //function needed to generate CSRF token provided from Django Documentation
+    function makeCookie(token) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = (cookies[i]).trim();
+                if (cookie.substring(0, token.length + 1) === (token + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(token.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
 
     // when create room clicked, post request made to django to make new room with info from form
     // this spits out a response afterwards with info on the room that the user doesn't change
@@ -19,15 +38,22 @@ function CreateRoom() {
     // to be used by the room page to get details on that room from django
     async function handleSubmitRoom() {
         const createdRoom = {host_name, votes_to_skip};
+        console.log(createdRoom)
+        console.log(JSON.stringify(createdRoom))
         try{
             const response = await fetch('http://localhost:8000/rooms/create', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken //POST request header needs CSRF Token generated above to accept request
+                },
                 body: JSON.stringify(createdRoom),
             })
             const json = await response.json();
+            console.log(json)
+            console.log(json['code'])
             const link = '/room/' + json['code']
-            setTimeout(() => { navigate(link); }, 1000);
+            setTimeout(() => { navigate(link); }, 2000);
         }
         catch(err) {
             throw err;
