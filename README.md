@@ -14,15 +14,15 @@ My main focus was on making the app as smooth and dyamic as possible, so I imple
 ## Setup and Install ##
 Set up is very easy because the build is included in the source code. To install run  
 
-```git clone https://github.com/Repo-Factory/Drink-Generator.git .```
+    git clone https://github.com/Repo-Factory/Drink-Generator.git .
 
 activate the virtual environment
 
-```source env/bin/activate```
+    source env/bin/activate
 
 and run the server with:
 
-```python manage.py runserver```
+    python manage.py runserver
 
 You'll find the app running at [localhost:8000](http://localhost:8000)
 
