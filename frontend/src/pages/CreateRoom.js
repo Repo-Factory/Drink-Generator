@@ -5,7 +5,6 @@ import ButtonCreater from '../components/ButtonCreater';
 import InputBox from '../components/InputBox';
 
 
-
 function CreateRoom() {
     const navigate = useNavigate(); //used to navigate to room link in App.js Room route
     
