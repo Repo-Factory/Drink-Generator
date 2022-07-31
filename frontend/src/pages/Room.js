@@ -46,9 +46,9 @@ function Room() {
     // When 'Generate Drinks' button is clicked, an array of drink names and images is requested from the backend
     // and displayed to the user through the drinkCard component
     const cocktailRequest = async() => {
-        fetchDrinks(drink)
-        .then(drinks => setDrinkArray(drinks))
-        .then(setView('Drink'));
+        const data = await fetchDrinks(drink)
+        setDrinkArray(data)
+        setView('Drink')
     }   
 
 
