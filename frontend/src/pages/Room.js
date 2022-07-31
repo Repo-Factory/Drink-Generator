@@ -22,60 +22,95 @@ function Room() {
     const [votes_to_skip, setVotesToSkip] = useState('');
     const [number_of_guests, setGuestNumber] = useState('');
     const [drink, setDrink] = useState('Vodka');
-    const [name, setName] = useState('');
-    const [image, setImage] = useState('');
+    const [currentDrinkname, setCurrentDrinkName] = useState('');
+    const [currentDrinkimage, setCurrentDrinkImage] = useState('');
     const [drinkArray, setDrinkArray] = useState([]);
     const [detailsArray, setDetailsArray] = useState([]);
     const [roomCodeCalled, setRoomCodeCalled] = useState('False');
-    const [idCalled, setIdCalled] = useState('False');
-    
+
 
     // uses roomcode from URL to display details about that room
     if (roomCodeCalled === 'False') {
         fetch('http://localhost:8000/rooms/room?code=' + roomCode)
         .then(response => response.json())
         .then(data => {
-            setHostName(data.host_name)
-            setVotesToSkip(data.votes_to_skip)
-            setCode(data.code)
-            setGuestNumber(data.number_of_guests)
-        });
-        setRoomCodeCalled('True') // prevents this from getting called infinitely
+            setHostName(data.host_name);
+            setVotesToSkip(data.votes_to_skip);
+            setCode(data.code);
+            setGuestNumber(data.number_of_guests);
+        }).then(setRoomCodeCalled('True'));
+         // prevents this from getting called infinitely
     }
     
 
     // When 'Generate Drinks' button is clicked, an array of drink names and images is requested from the backend
     // and displayed to the user through the drinkCard component
-    function cocktailRequest() {
-        setView('Drink')
-        fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase())
-        .then(response => response.json())
-        .then(data => setDrinkArray(data))
+    const cocktailRequest = async() => {
+        fetchDrinks(drink)
+        .then(drinks => setDrinkArray(drinks))
+        .then(setView('Drink'));
     }   
 
-    // When drinkCard name is clicked, that name is saved to 'name' which triggers useEffect to change to details page
-    // and request details from the API by name, this doesn't retrieve image, but does retrieve an id used in details view
-    // to  make another request and get the image
+
+    // When drinkCard name is clicked, that name is saved to 'currentDrinkName' which triggers useEffect to request details from the API by name, this doesn't retrieve image, 
+    // but does retrieve an id used in details view to  make another request and get the image
     useEffect(() => {
-        if (name === ''){
+        if (currentDrinkname === '') {
         }
         else {
-        setIdCalled('False') // so user can click on multiple drinks
-        setTimeout(() => { setView('Details') }, 1000);
-        fetch('http://localhost:8000/cocktails/name?name=' + name.toLowerCase())
-        .then(response => response.json())
-        .then(data => setDetailsArray(data))
+            const detailsRequest = async () => {
+                const data = await fetchDetails(currentDrinkname);
+                setDetailsArray(data);
+            }
+            detailsRequest();
+            
         }
-    }, [name]);
+    }, [currentDrinkname]);
     
 
+    //once the details array is set, an API request can be made to request the image using the id of that drink
+    useEffect(() => {
+        if (detailsArray.length === 0) {
+        }
+        else{
+            const id = detailsArray[0];
+            const imageRequest = async () => {
+                const data = await fetchImage(id);
+                setCurrentDrinkImage(data);
+                setView('Details');
+            }
+            imageRequest();
+        }
+    }, [detailsArray])
+
+
+    //api call to generate random drinks based on alcohol type @param drink
+    async function fetchDrinks(drink) {
+        const data = await fetch('http://localhost:8000/cocktails/generate?drink=' + drink.toLowerCase());
+        return await data.json();
+    }
+
+    //api call to get details of a drink by name
+    async function fetchDetails(name) {
+        const data = await fetch('http://localhost:8000/cocktails/name?name=' + name.toLowerCase());
+        return await data.json();
+    }
+
+
+    //api call to get image of drink by id (found in details)
+    async function fetchImage(id) {
+        const data = await fetch('http://localhost:8000/cocktails/id?id=' + id);
+        return await data.json();
+    }
+
+
     function returnToInitialView() {
-        setView('Initial')
+        setView('Initial');
     }
    
 
     function returnToDrinkView() {
-        setView('Drink')
+        setView('Drink');
     }
 
 
@@ -196,7 +231,7 @@ function Room() {
         let drinkCardItems = [];
         for(let i = 0; i < drinkArray.length; i++){
             drinkCardItems.push(<Grid item xs={12} sm={6} align='center'><DrinkCard name={drinkArray[i]['strDrink']} 
-            image={drinkArray[i]['strDrinkThumb']} onClick={() => setName(drinkArray[i]['strDrink'])}
+            image={drinkArray[i]['strDrinkThumb']} onClick={() => setCurrentDrinkName(drinkArray[i]['strDrink'])}
             /></Grid>)
         }
 
@@ -225,20 +260,13 @@ function Room() {
 
 if (view === 'Details') {
         
-        //gets image from the API using the id attribute retrieved in the name API call
-        if (idCalled === 'False'){
-            const id = detailsArray[0]
-            fetch('http://localhost:8000/cocktails/id?id=' + id)
-            .then(response => response.json())
-            .then(data => {setImage(data)});
-            setIdCalled('True');
-        }
-
+    
         return (
+            
                 <div className = 'detailsCenter'>
                     <Grid container spacing={2}>
                         <Grid item xs={12} align="center">
-                        <DrinkCard name={name} image={image}/>
+                        <DrinkCard name={currentDrinkname} image={currentDrinkimage}/>
                         </Grid>
                         <Grid item xs={12} align="center">
                             

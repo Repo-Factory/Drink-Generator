@@ -47,8 +47,8 @@ function CreateRoom() {
                 body: JSON.stringify(createdRoom),
             })
             const json = await response.json();
-            const link = '/room/' + json['code']
-            setTimeout(() => { navigate(link); }, 1000);
+            const link =  '/room/' + json['code']
+            navigate(link);
         }
         catch(err) {
             throw err;
