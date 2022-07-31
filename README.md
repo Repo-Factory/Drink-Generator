@@ -27,6 +27,5 @@ and run the server with:
 You'll find the app running at [localhost:8000](http://localhost:8000)
 
 
-
 ## In-Work Features ##
-I also thought it would be fun to add a game type feature to the app and give it a lobby/room setup where different clients can log in to the same room. A host would generate drinks and the players could vote on which one they want to drink to decide what to serve at a party. I'm currently in the middle of working on that feature right now but also have other projects I'm working on so it will be done in a few weeks. I think the generator aspect of the app is entertaining enough to have it posted even though that functionality isn't completely finished. 
+I also thought it would be fun to add a game type feature to the app and give it a lobby/room setup where different clients can log in to the same room. A host would generate drinks and the players could vote on which one they want to drink to decide what to serve at a party. I'm in the middle of working on that feature right now but I think the generator aspect of the app is entertaining enough to have it posted even though that functionality isn't completely finished.

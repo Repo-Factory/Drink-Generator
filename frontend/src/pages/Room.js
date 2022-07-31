@@ -63,7 +63,6 @@ function Room() {
                 setDetailsArray(data);
             }
             detailsRequest();
-            
         }
     }, [currentDrinkname]);
     
@@ -260,7 +259,7 @@ function Room() {
 
 if (view === 'Details') {
         
-    
+
         return (
             
                 <div className = 'detailsCenter'>
